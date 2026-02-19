@@ -161,7 +161,9 @@ public sealed class HeliosDbContext : DbContext
             b.Property(x => x.ProjectId).HasColumnName("project_id");
             b.Property(x => x.EnvironmentId).HasColumnName("environment_id");
             b.Property(x => x.Name).HasColumnName("name").IsRequired();
+            b.Property(x => x.Description).HasColumnName("description");
             b.Property(x => x.Hostname).HasColumnName("hostname");
+            b.Property(x => x.Status).HasColumnName("status");
             b.Property(x => x.TagsJson).HasColumnName("tags").HasColumnType("jsonb");
             b.Property(x => x.CreatedAt).HasColumnName("created_at");
             b.Property(x => x.UpdatedAt).HasColumnName("updated_at");
@@ -285,8 +287,9 @@ public sealed class HeliosDbContext : DbContext
         modelBuilder.Entity<AgentHeartbeat>(b =>
         {
             b.ToTable("agent_heartbeats");
-            b.HasNoKey(); // history table; alternatively add synthetic id. For v0.1, no key is OK for EF queries only.
+            b.HasKey(x => x.HeartbeatId);
 
+            b.Property(x => x.HeartbeatId).HasColumnName("heartbeat_id");
             b.Property(x => x.TenantId).HasColumnName("tenant_id");
             b.Property(x => x.AgentId).HasColumnName("agent_id");
             b.Property(x => x.ServerId).HasColumnName("server_id");
@@ -299,9 +302,9 @@ public sealed class HeliosDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade);
 
             b.HasOne(x => x.Agent)
-                .WithMany(a => a.Heartbeats)
-                .HasForeignKey(x => x.AgentId)
-                .OnDelete(DeleteBehavior.Cascade);
+               .WithMany(a => a.Heartbeats)   
+               .HasForeignKey(x => x.AgentId)
+               .OnDelete(DeleteBehavior.Cascade);
 
             b.HasOne(x => x.Server)
                 .WithMany()

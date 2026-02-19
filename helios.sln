@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36915.13 d17.14
+VisualStudioVersion = 17.14.36915.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Api", "Helios.Api\Helios.Api.csproj", "{8ECA7DDC-478F-42FF-8B23-7BBA3C503DA0}"
 EndProject
@@ -18,6 +18,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Platform", "Helios.Platform\Helios.Platform.csproj", "{93D59F37-3DB7-402B-B153-4921927398A5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Agents", "Helios.Agents\Helios.Agents.csproj", "{6D197E54-EE73-4E75-88D9-C00D96C86C03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Application", "Helios.Application\Helios.Application.csproj", "{00918C86-E8A1-42E3-89A6-EC2C8B3FAAEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Infrastructure", "Helios.Infrastructure\Helios.Infrastructure.csproj", "{23DD60A6-1BBA-43DF-B6EF-BE3FC19EB3C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{6D197E54-EE73-4E75-88D9-C00D96C86C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D197E54-EE73-4E75-88D9-C00D96C86C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D197E54-EE73-4E75-88D9-C00D96C86C03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00918C86-E8A1-42E3-89A6-EC2C8B3FAAEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00918C86-E8A1-42E3-89A6-EC2C8B3FAAEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00918C86-E8A1-42E3-89A6-EC2C8B3FAAEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00918C86-E8A1-42E3-89A6-EC2C8B3FAAEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23DD60A6-1BBA-43DF-B6EF-BE3FC19EB3C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23DD60A6-1BBA-43DF-B6EF-BE3FC19EB3C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23DD60A6-1BBA-43DF-B6EF-BE3FC19EB3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23DD60A6-1BBA-43DF-B6EF-BE3FC19EB3C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

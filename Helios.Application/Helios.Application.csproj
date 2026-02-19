@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.9" />
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.16.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Helios.Agents\Helios.Agents.csproj" />
     <ProjectReference Include="..\Helios.Contracts\Helios.Contracts.csproj" />
+    <ProjectReference Include="..\Helios.Core\Helios.Core.csproj" />
+    <ProjectReference Include="..\Helios.Identity\Helios.Identity.csproj" />
+    <ProjectReference Include="..\Helios.Infrastructure\Helios.Infrastructure.csproj" />
     <ProjectReference Include="..\Helios.Persistence\Helios.Persistence.csproj" />
+    <ProjectReference Include="..\Helios.Platform\Helios.Platform.csproj" />
   </ItemGroup>
 
 </Project>
