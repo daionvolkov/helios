@@ -1,5 +1,6 @@
-﻿using Helios.Contracts.Auth;
-using Helios.Identity.Services;
+﻿using Helios.Api.Common;
+using Helios.Application.Identity;
+using Helios.Contracts.Auth;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Helios.Api.Controllers;
@@ -8,18 +9,15 @@ namespace Helios.Api.Controllers;
 [Route("auth")]
 public class AuthController : ControllerBase
 {
-    private readonly ILoginService _login;
-    public AuthController(ILoginService login) => _login = login;
+    private readonly IAuthAppService _auth;
+    public AuthController(IAuthAppService auth) => _auth = auth;
 
 
     [HttpPost("login")]
-    public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest req, CancellationToken ct)
+    public async Task<IActionResult> Login([FromBody] LoginRequest req, CancellationToken ct)
     {
-        var result = await _login.LoginAsync(req, ct);
-        if (result == null)
-            return Unauthorized("Invalid credentials");
-
-        return Ok(result);
+        var result = await _auth.LoginAsync(req, ct);
+        return result.ToActionResult(this);
     }
 
 }

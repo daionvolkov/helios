@@ -2,6 +2,7 @@
 
 public sealed class AgentHeartbeat
 {
+    public Guid HeartbeatId { get; set; }
     public Guid TenantId { get; set; }
     public Guid AgentId { get; set; }
     public Guid ServerId { get; set; }

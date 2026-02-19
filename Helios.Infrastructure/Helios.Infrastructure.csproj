@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Helios.Infrastructure\Helios.Infrastructure.csproj" />
-    <ProjectReference Include="..\Helios.Persistence\Helios.Persistence.csproj" />
+    <Folder Include="Intefaces\" />
   </ItemGroup>
 
 </Project>

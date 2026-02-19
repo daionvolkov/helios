@@ -7,9 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Auth\" />
-    <Folder Include="Hosting\" />
-    <Folder Include="DependencyInjection\" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.13" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.13" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.16.0" />
+    <PackageReference Include="System.Security.Claims" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Helios.Agents\Helios.Agents.csproj" />
+    <ProjectReference Include="..\Helios.Application\Helios.Application.csproj" />
+    <ProjectReference Include="..\Helios.Core\Helios.Core.csproj" />
+    <ProjectReference Include="..\Helios.Identity\Helios.Identity.csproj" />
+    <ProjectReference Include="..\Helios.Persistence\Helios.Persistence.csproj" />
+    <ProjectReference Include="..\Helios.Platform\Helios.Platform.csproj" />
   </ItemGroup>
 
 </Project>

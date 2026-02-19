@@ -1,6 +1,6 @@
-﻿namespace Helios.Persistence.Entities;
+﻿namespace Helios.Platform.Servers;
 
-public sealed class Server
+public sealed class ServerDto
 {
     public Guid ServerId { get; set; }
     public Guid TenantId { get; set; }
@@ -10,13 +10,11 @@ public sealed class Server
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
     public string? Hostname { get; set; }
-    public string? TagsJson { get; set; } 
-    public string? Status { get; set; }
+
+    public List<string> TagsJson { get; set; } = new();
+
+    public ServerStatus Status { get; set; }
+
     public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset UpdatedAt { get; set; }
-
-    public Tenant Tenant { get; set; } = null!;
-    public Project? Project { get; set; }
-    public ProjectEnvironment? Environment { get; set; }
-    public List<Agent> Agents { get; set; } = new();
 }
