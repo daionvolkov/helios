@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Helios.Identity\Helios.Identity.csproj" />
+  </ItemGroup>
+
 </Project>

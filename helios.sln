@@ -3,7 +3,61 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36915.13 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Api", "Helios.Api\Helios.Api.csproj", "{8ECA7DDC-478F-42FF-8B23-7BBA3C503DA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Identity", "Helios.Identity\Helios.Identity.csproj", "{536EF308-0D08-4532-8608-BE7538E8D18B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Persistence", "Helios.Persistence\Helios.Persistence.csproj", "{41C65907-E79B-4FF9-BF86-0A346C242C4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Contracts", "Helios.Contracts\Helios.Contracts.csproj", "{19866379-7153-459F-8D78-1E21E744F562}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.App", "Helios.App\Helios.App.csproj", "{C77C8A39-446D-4F41-B583-66CF2A569B83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Core", "Helios.Core\Helios.Core.csproj", "{7CC225D1-A899-4006-8C90-F71E52640187}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Platform", "Helios.Platform\Helios.Platform.csproj", "{93D59F37-3DB7-402B-B153-4921927398A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helios.Agents", "Helios.Agents\Helios.Agents.csproj", "{6D197E54-EE73-4E75-88D9-C00D96C86C03}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8ECA7DDC-478F-42FF-8B23-7BBA3C503DA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ECA7DDC-478F-42FF-8B23-7BBA3C503DA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ECA7DDC-478F-42FF-8B23-7BBA3C503DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ECA7DDC-478F-42FF-8B23-7BBA3C503DA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536EF308-0D08-4532-8608-BE7538E8D18B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536EF308-0D08-4532-8608-BE7538E8D18B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536EF308-0D08-4532-8608-BE7538E8D18B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536EF308-0D08-4532-8608-BE7538E8D18B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41C65907-E79B-4FF9-BF86-0A346C242C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41C65907-E79B-4FF9-BF86-0A346C242C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41C65907-E79B-4FF9-BF86-0A346C242C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41C65907-E79B-4FF9-BF86-0A346C242C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19866379-7153-459F-8D78-1E21E744F562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19866379-7153-459F-8D78-1E21E744F562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19866379-7153-459F-8D78-1E21E744F562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19866379-7153-459F-8D78-1E21E744F562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C77C8A39-446D-4F41-B583-66CF2A569B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C77C8A39-446D-4F41-B583-66CF2A569B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C77C8A39-446D-4F41-B583-66CF2A569B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C77C8A39-446D-4F41-B583-66CF2A569B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CC225D1-A899-4006-8C90-F71E52640187}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CC225D1-A899-4006-8C90-F71E52640187}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CC225D1-A899-4006-8C90-F71E52640187}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CC225D1-A899-4006-8C90-F71E52640187}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D59F37-3DB7-402B-B153-4921927398A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D59F37-3DB7-402B-B153-4921927398A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D59F37-3DB7-402B-B153-4921927398A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D59F37-3DB7-402B-B153-4921927398A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D197E54-EE73-4E75-88D9-C00D96C86C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D197E54-EE73-4E75-88D9-C00D96C86C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D197E54-EE73-4E75-88D9-C00D96C86C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D197E54-EE73-4E75-88D9-C00D96C86C03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
