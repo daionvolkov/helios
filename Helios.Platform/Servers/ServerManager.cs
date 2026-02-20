@@ -30,7 +30,6 @@ public sealed class ServerManager : IServerManager
         var name = model.Name.Trim();
         var normalizedTags = NormalizeTags(model.Tags);
 
-        // pre-check uniqueness (still keep DB unique index)
         var exists = await _db.Servers.AsNoTracking()
             .AnyAsync(s => s.TenantId == tenantId && s.Name.ToLower() == name.ToLower(), ct);
 
@@ -116,7 +115,6 @@ public sealed class ServerManager : IServerManager
         var search = query.Search?.Trim();
         if (!string.IsNullOrWhiteSpace(search))
         {
-            // Basic contains search. If you want ILIKE later: use EF.Functions.ILike (Postgres).
             var lowered = search.ToLower();
             q = q.Where(s =>
                 s.Name.ToLower().Contains(lowered) ||
@@ -130,11 +128,10 @@ public sealed class ServerManager : IServerManager
             if (query.TagsMode == TagsFilterMode.All)
             {
                 foreach (var tag in tags)
-                    q = q.Where(s => s.TagsJson.Contains(tag)); // translates to tag = ANY(tags)
+                    q = q.Where(s => s.TagsJson.Contains(tag)); 
             }
             else
             {
-                // OR chain: server contains any of tags
                 var predicate = BuildAnyTagPredicate(tags);
                 q = q.Where(predicate);
             }
@@ -305,7 +302,6 @@ public sealed class ServerManager : IServerManager
 
     private static Expression<Func<Server, bool>> BuildAnyTagPredicate(string[] tags)
     {
-        // s => s.Tags.Contains(tags[0]) || s.Tags.Contains(tags[1]) || ...
         var param = Expression.Parameter(typeof(Server), "s");
         var tagsProp = Expression.Property(param, nameof(Server.TagsJson));
 

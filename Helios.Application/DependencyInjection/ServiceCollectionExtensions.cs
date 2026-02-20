@@ -1,4 +1,5 @@
 ﻿using Helios.Application.Abstractions;
+using Helios.Platform.Agents.Intrefaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Helios.Application.DependencyInjection
@@ -18,6 +19,9 @@ namespace Helios.Application.DependencyInjection
 
             // Platform managers (domain)
             services.AddScoped<Helios.Platform.Servers.IServerManager, Helios.Platform.Servers.ServerManager>();
+
+            services.AddScoped<IAgentEnrollmentManager, Helios.Platform.Agents.AgentEnrollmentManager>();
+            services.AddScoped<IAgentManager, Helios.Platform.Agents.AgentManager>();
 
 
             return services;

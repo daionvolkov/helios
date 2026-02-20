@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Helios.Persistence\Helios.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Agents\Enrollment\" />
+  </ItemGroup>
+
 </Project>
