@@ -9,29 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d39acef-7971-4648-80ad-343bdb02202b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Helios.Application/Agents/AgentsAppService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Application/Agents/EnrollmentAppService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Application/Agents/IAgentsAppService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Application/Agents/IEnrollmentAppService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Contracts/Agents/Agents/CreateEnrollmentTokenResponse.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/AppErrorMappingExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/AppResultHttpExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/ErrorKindHttpMapping.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/ExceptionToAppError.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/IHasErrorInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/ToAppErrorExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Helios.Platform/Agents/AppError.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Application/Platform/Servers/ServersAppService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Application/Platform/Servers/ServersAppService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Infrastructure/Helios.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Infrastructure/Helios.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/AppError.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/AppError.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/AppResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/AppResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/ErrorCodes.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Infrastructure/ResultProcessing/ErrorCodes.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Platform/Agents/AgentEnrollmentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Platform/Agents/AgentEnrollmentManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Platform/Agents/AgentManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Platform/Agents/AgentManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Platform/Common/DomainError.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Platform/Common/DomainError.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Platform/Common/DomainErrorKind.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Platform/Common/DomainErrorKind.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Platform/Common/DomainResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Platform/Common/DomainResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Helios.Platform/Servers/ServerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Platform/Servers/ServerManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Helios.Api/Controllers/AgentsController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Helios.Api/Controllers/EnrollmentController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.helios/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.helios/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helios.Api/Common/AppResultExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Api/Common/AppResultExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helios.Api/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Api/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helios.Api/Controllers/ServersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Api/Controllers/ServersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helios.Api/Controllers/TenantsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Api/Controllers/TenantsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Helios.Application/DependencyInjection/ServiceCollectionExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Helios.Application/DependencyInjection/ServiceCollectionExtensions.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,25 +40,28 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "daionvolkov"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;daionvolkov&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/daionvolkov/helios.git",
-    "accountId": "1054f9d7-5bf1-45ab-b41e-44b29aa48bf9"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/daionvolkov/helios.git&quot;,
+    &quot;accountId&quot;: &quot;1054f9d7-5bf1-45ab-b41e-44b29aa48bf9&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Users/daniilvolkov/Documents/Projects/helios/Helios.Infrastructure/ResultProcessing/AppError.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="3A1dXhvEgaPmfnO3Wh751kciCzO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -82,20 +70,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Helios.Api: http.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "add__Enrollment",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Helios.Api: http.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;add__controllers&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Helios.Api: http">
     <configuration name="Helios.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Helios.Api/Helios.Api.csproj" />
@@ -136,7 +124,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771764051956</updated>
-      <workItem from="1771764056420" duration="4635000" />
+      <workItem from="1771764056420" duration="7261000" />
     </task>
     <servers />
   </component>
@@ -154,7 +142,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="add_Enrollment" />
+                        <option value="add_controllers" />
                       </list>
                     </value>
                   </entry>
@@ -168,5 +156,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Helios.Api/Controllers/EnrollmentController.cs</url>
+          <line>30</line>
+          <properties documentPath="$PROJECT_DIR$/Helios.Api/Controllers/EnrollmentController.cs" containingFunctionPresentation="Method 'Enroll'">
+            <startOffsets>
+              <option value="1040" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1075" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

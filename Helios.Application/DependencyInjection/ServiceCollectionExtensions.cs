@@ -1,4 +1,5 @@
 ﻿using Helios.Application.Abstractions;
+using Helios.Platform.Agents;
 using Helios.Platform.Agents.Intrefaces;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,7 +24,13 @@ namespace Helios.Application.DependencyInjection
             services.AddScoped<IAgentEnrollmentManager, Helios.Platform.Agents.AgentEnrollmentManager>();
             services.AddScoped<IAgentManager, Helios.Platform.Agents.AgentManager>();
 
+            // Platform managers
+            services.AddScoped<AgentEnrollmentManager, Helios.Platform.Agents.AgentEnrollmentManager>();
+            services.AddScoped<IAgentManager, Helios.Platform.Agents.AgentManager>();
 
+            // Application services
+            services.AddScoped<Helios.Application.Agents.IEnrollmentAppService, Helios.Application.Agents.EnrollmentAppService>();
+            services.AddScoped<Helios.Application.Agents.IAgentsAppService, Helios.Application.Agents.AgentsAppService>();
             return services;
         }
     }

@@ -20,14 +20,14 @@ public sealed class ServersController : ControllerBase
     public async Task<IActionResult> Create([FromBody] CreateServerRequest request, CancellationToken ct)
     {
         var res = await _servers.CreateAsync(request, ct);
-        return res.ToActionResult(this);
+        return res.ToIActionResult(this);
     }
 
     [HttpGet]
     public async Task<IActionResult> GetList([FromQuery] GetServersRequest request, CancellationToken ct)
     {
         var res = await _servers.GetListAsync(request, ct);
-        return res.ToActionResult(this);
+        return res.ToIActionResult(this);
     }
 
     [HttpGet("{id:guid}")]
