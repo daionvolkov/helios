@@ -18,6 +18,6 @@ public class TenantsController : ControllerBase
     public async Task<IActionResult> Me(CancellationToken ct)
     {
         var result = await _tenants.GetMyTenantAsync(ct);
-        return result.ToActionResult(this);
+        return result.ToIActionResult(this);
     }
 }
