@@ -1,8 +1,12 @@
-﻿namespace Helios.Platform.Common;
+﻿using Helios.Infrastructure.ResultProcessing;
 
-public sealed record DomainError(
-    string Code,
-    string Message,
-    DomainErrorKind Kind
-);
+namespace Helios.Platform.Common;
+
+
+//
+//public sealed record DomainError(
+ //   string Code,
+//    string Message,
+//    DomainErrorKind Kind
+//)
     

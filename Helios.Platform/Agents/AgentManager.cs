@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using System.Security.Cryptography;
+using Helios.Infrastructure.ResultProcessing;
 
 namespace Helios.Platform.Agents;
 
@@ -31,16 +32,15 @@ public sealed class AgentManager : IAgentManager
         string? capabilitiesJson,
         CancellationToken ct)
     {
-        // minimal validation (остальное можно вынести в validator)
         if (string.IsNullOrWhiteSpace(displayName) ||
             string.IsNullOrWhiteSpace(agentVersion) ||
             string.IsNullOrWhiteSpace(os) ||
             string.IsNullOrWhiteSpace(arch))
         {
-            return DomainResult<(Guid, string, string)>.Failure(new DomainError(
+            return DomainResult<(Guid, string, string)>.Failure(new AppError(
                 DomainErrorCodes.Agents.ValidationFailed,
                 "DisplayName, AgentVersion, Os and Arch are required.",
-                DomainErrorKind.Validation));
+                ErrorKind.Validation));
         }
 
         var serverExists = await _db.Servers.AsNoTracking()
@@ -48,10 +48,10 @@ public sealed class AgentManager : IAgentManager
 
         if (!serverExists)
         {
-            return DomainResult<(Guid, string, string)>.Failure(new DomainError(
+            return DomainResult<(Guid, string, string)>.Failure(new AppError(
                 DomainErrorCodes.Agents.ServerNotFound,
                 "Server not found.",
-                DomainErrorKind.NotFound));
+                ErrorKind.NotFound));
         }
 
         var now = DateTimeOffset.UtcNow;
@@ -102,10 +102,10 @@ public sealed class AgentManager : IAgentManager
         catch (Exception ex)
         {
             _logger.LogError(ex, "Create agent failed tenantId={TenantId} serverId={ServerId}", tenantId, serverId);
-            return DomainResult<(Guid, string, string)>.Failure(new DomainError(
+            return DomainResult<(Guid, string, string)>.Failure(new AppError(
                 DomainErrorCodes.Agents.Unexpected,
                 "Unexpected error.",
-                DomainErrorKind.Internal));
+                ErrorKind.Internal));
         }
     }
 
@@ -133,10 +133,10 @@ public sealed class AgentManager : IAgentManager
 
         if (agent == null)
         {
-            return DomainResult<Agent>.Failure(new DomainError(
+            return DomainResult<Agent>.Failure(new AppError(
                 DomainErrorCodes.Agents.AgentNotFound,
                 "Agent not found.",
-                DomainErrorKind.NotFound));
+                ErrorKind.NotFound));
         }
 
         return DomainResult<Agent>.Success(agent);
@@ -179,10 +179,10 @@ public sealed class AgentManager : IAgentManager
         catch (Exception ex)
         {
             _logger.LogError(ex, "Retry create agent credential failed agentId={AgentId}", agent.AgentId);
-            return DomainResult<(Guid, string, string)>.Failure(new DomainError(
+            return DomainResult<(Guid, string, string)>.Failure(new AppError(
                 DomainErrorCodes.Agents.Unexpected,
                 "Unexpected error.",
-                DomainErrorKind.Internal));
+                ErrorKind.Internal));
         }
     }
 

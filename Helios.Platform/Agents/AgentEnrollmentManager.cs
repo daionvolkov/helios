@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Security.Cryptography;
 using System.Text;
+using Helios.Infrastructure.ResultProcessing;
 
 namespace Helios.Platform.Agents;
 
@@ -30,10 +31,10 @@ public sealed class AgentEnrollmentManager : IAgentEnrollmentManager
     {
         if (ttl <= TimeSpan.Zero || ttl > TimeSpan.FromDays(7))
         {
-            return DomainResult<(string, DateTimeOffset)>.Failure(new DomainError(
+            return DomainResult<(string, DateTimeOffset)>.Failure(new AppError(
                 DomainErrorCodes.Agents.ValidationFailed,
                 "Invalid TTL.",
-                DomainErrorKind.Validation));
+                ErrorKind.Validation));
         }
 
         // Ensure server exists and belongs to tenant
@@ -42,10 +43,10 @@ public sealed class AgentEnrollmentManager : IAgentEnrollmentManager
 
         if (!serverExists)
         {
-            return DomainResult<(string, DateTimeOffset)>.Failure(new DomainError(
+            return DomainResult<(string, DateTimeOffset)>.Failure(new AppError(
                 DomainErrorCodes.Agents.ServerNotFound,
                 "Server not found.",
-                DomainErrorKind.NotFound));
+                ErrorKind.NotFound));
         }
 
         var now = DateTimeOffset.UtcNow;
@@ -76,10 +77,10 @@ public sealed class AgentEnrollmentManager : IAgentEnrollmentManager
         catch (Exception ex)
         {
             _logger.LogError(ex, "Create enrollment token failed tenantId={TenantId} serverId={ServerId}", tenantId, serverId);
-            return DomainResult<(string, DateTimeOffset)>.Failure(new DomainError(
+            return DomainResult<(string, DateTimeOffset)>.Failure(new AppError(
                 DomainErrorCodes.Agents.Unexpected,
                 "Unexpected error.",
-                DomainErrorKind.Internal));
+                ErrorKind.Internal));
         }
     }
 
@@ -87,10 +88,10 @@ public sealed class AgentEnrollmentManager : IAgentEnrollmentManager
     {
         if (string.IsNullOrWhiteSpace(plainToken))
         {
-            return DomainResult<(Guid, Guid)>.Failure(new DomainError(
+            return DomainResult<(Guid, Guid)>.Failure(new AppError(
                 DomainErrorCodes.Agents.TokenInvalid,
                 "Invalid token.",
-                DomainErrorKind.Validation));
+                ErrorKind.Validation));
         }
 
         var tokenHash = Sha256Bytes(plainToken.Trim());
@@ -102,28 +103,28 @@ public sealed class AgentEnrollmentManager : IAgentEnrollmentManager
 
         if (token == null)
         {
-            return DomainResult<(Guid, Guid)>.Failure(new DomainError(
+            return DomainResult<(Guid, Guid)>.Failure(new AppError(
                 DomainErrorCodes.Agents.TokenInvalid,
                 "Invalid token.",
-                DomainErrorKind.NotFound));
+                ErrorKind.NotFound));
         }
 
         var now = DateTimeOffset.UtcNow;
 
         if (token.UsedAt.HasValue)
         {
-            return DomainResult<(Guid, Guid)>.Failure(new DomainError(
+            return DomainResult<(Guid, Guid)>.Failure(new AppError(
                 DomainErrorCodes.Agents.TokenAlreadyUsed,
                 "Token already used.",
-                DomainErrorKind.Conflict));
+                ErrorKind.Conflict));
         }
 
         if (token.ExpiresAt <= now)
         {
-            return DomainResult<(Guid, Guid)>.Failure(new DomainError(
+            return DomainResult<(Guid, Guid)>.Failure(new AppError(
                 DomainErrorCodes.Agents.TokenExpired,
                 "Token expired.",
-                DomainErrorKind.Conflict));
+                ErrorKind.Conflict));
         }
 
         token.UsedAt = now;
@@ -136,10 +137,10 @@ public sealed class AgentEnrollmentManager : IAgentEnrollmentManager
         catch (Exception ex)
         {
             _logger.LogError(ex, "Consume enrollment token failed tokenId={TokenId}", token.TokenId);
-            return DomainResult<(Guid, Guid)>.Failure(new DomainError(
+            return DomainResult<(Guid, Guid)>.Failure(new AppError(
                 DomainErrorCodes.Agents.Unexpected,
                 "Unexpected error.",
-                DomainErrorKind.Internal));
+                ErrorKind.Internal));
         }
     }
 
