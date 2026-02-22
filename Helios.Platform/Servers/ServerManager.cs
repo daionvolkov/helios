@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using System.Linq.Expressions;
+using Helios.Infrastructure.ResultProcessing;
 
 namespace Helios.Platform.Servers;
 
@@ -23,9 +24,8 @@ public sealed class ServerManager : IServerManager
 
     public async Task<DomainResult<Server>> CreateAsync(Guid tenantId, CreateServerModel model, CancellationToken ct)
     {
-        var validationError = ValidateCreate(model);
-        if (validationError != null)
-            return DomainResult<Server>.Failure(validationError);
+        AppError validationError = ValidateCreate(model);
+        return DomainResult<Server>.Failure(validationError);
 
         var name = model.Name.Trim();
         var normalizedTags = NormalizeTags(model.Tags);
@@ -34,10 +34,10 @@ public sealed class ServerManager : IServerManager
             .AnyAsync(s => s.TenantId == tenantId && s.Name.ToLower() == name.ToLower(), ct);
 
         if (exists)
-            return DomainResult<Server>.Failure(new DomainError(
+            return DomainResult<Server>.Failure(new AppError(
                 DomainErrorCodes.PlatformServers.NameConflict,
                 "Server name already exists.",
-                DomainErrorKind.Conflict));
+                ErrorKind.Conflict));
 
         var now = DateTimeOffset.UtcNow;
 
@@ -65,18 +65,18 @@ public sealed class ServerManager : IServerManager
         }
         catch (DbUpdateException ex) when (IsUniqueViolation(ex))
         {
-            return DomainResult<Server>.Failure(new DomainError(
+            return DomainResult<Server>.Failure(new AppError(
                 DomainErrorCodes.PlatformServers.NameConflict,
                 "Server name already exists.",
-                DomainErrorKind.Conflict));
+                ErrorKind.Conflict));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Create server failed tenantId={TenantId} name={Name}", tenantId, name);
-            return DomainResult<Server>.Failure(new DomainError(
+            return DomainResult<Server>.Failure(new AppError(
                 DomainErrorCodes.PlatformServers.Unexpected,
                 "Unexpected error.",
-                DomainErrorKind.Internal));
+                ErrorKind.Internal));
         }
     }
 
@@ -86,10 +86,10 @@ public sealed class ServerManager : IServerManager
             .FirstOrDefaultAsync(s => s.TenantId == tenantId && s.ServerId == serverId, ct);
 
         if (server == null)
-            return DomainResult<Server>.Failure(new DomainError(
+            return DomainResult<Server>.Failure(new AppError(
                 DomainErrorCodes.PlatformServers.NotFound,
                 "Server not found.",
-                DomainErrorKind.NotFound));
+                ErrorKind.NotFound));
 
         return DomainResult<Server>.Success(server);
     }
@@ -171,10 +171,10 @@ public sealed class ServerManager : IServerManager
             .FirstOrDefaultAsync(s => s.TenantId == tenantId && s.ServerId == serverId, ct);
 
         if (server == null)
-            return DomainResult<Server>.Failure(new DomainError(
+            return DomainResult<Server>.Failure(new AppError(
                 DomainErrorCodes.PlatformServers.NotFound,
                 "Server not found.",
-                DomainErrorKind.NotFound));
+                ErrorKind.NotFound));
 
         if (model.ProjectId.HasValue)
             server.ProjectId = model.ProjectId;
@@ -203,10 +203,10 @@ public sealed class ServerManager : IServerManager
             var st = NormalizeStatus(model.Status);
             if (st == null)
             {
-                return DomainResult<Server>.Failure(new DomainError(
+                return DomainResult<Server>.Failure(new AppError(
                     DomainErrorCodes.PlatformServers.ValidationFailed,
                     "Invalid status. Allowed: Active, Inactive.",
-                    DomainErrorKind.Validation));
+                    ErrorKind.Validation));
             }
             server.Status = st;
         }
@@ -220,65 +220,65 @@ public sealed class ServerManager : IServerManager
         }
         catch (DbUpdateException ex) when (IsUniqueViolation(ex))
         {
-            return DomainResult<Server>.Failure(new DomainError(
+            return DomainResult<Server>.Failure(new AppError(
                 DomainErrorCodes.PlatformServers.NameConflict,
                 "Server name already exists.",
-                DomainErrorKind.Conflict));
+                ErrorKind.Conflict));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Update server failed tenantId={TenantId} serverId={ServerId}", tenantId, serverId);
-            return DomainResult<Server>.Failure(new DomainError(
+            return DomainResult<Server>.Failure(new AppError(
                 DomainErrorCodes.PlatformServers.Unexpected,
                 "Unexpected error.",
-                DomainErrorKind.Internal));
+                ErrorKind.Internal));
         }
     }
 
-    private static DomainError? ValidateCreate(CreateServerModel model)
+    private static AppError ValidateCreate(CreateServerModel model)
     {
         if (model.Name == null)
-            return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Name is required.", DomainErrorKind.Validation);
+            return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Name is required.", ErrorKind.Validation);
 
         var name = model.Name.Trim();
         if (name.Length < 2 || name.Length > 100)
-            return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Name length must be 2..100.", DomainErrorKind.Validation);
+            return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Name length must be 2..100.", ErrorKind.Validation);
 
         if (model.Tags != null && model.Tags.Count > 20)
-            return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Tags max count is 20.", DomainErrorKind.Validation);
+            return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Tags max count is 20.", ErrorKind.Validation);
 
         return null;
     }
 
-    private static DomainError? ValidateUpdate(UpdateServerModel model)
+    private static AppError? ValidateUpdate(UpdateServerModel model)
     {
         if (model.Name != null)
         {
             var name = model.Name.Trim();
             if (name.Length < 2 || name.Length > 100)
-                return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Name length must be 2..100.", DomainErrorKind.Validation);
+                return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Name length must be 2..100.", ErrorKind.Validation);
         }
 
         if (model.Tags != null && model.Tags.Count > 20)
-            return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Tags max count is 20.", DomainErrorKind.Validation);
+            return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Tags max count is 20.", ErrorKind.Validation);
 
         if (model.Status != null && NormalizeStatus(model.Status) == null)
-            return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Invalid status. Allowed: Active, Inactive.", DomainErrorKind.Validation);
+            return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Invalid status. Allowed: Active, Inactive.", ErrorKind.Validation);
 
         return null;
     }
 
-    private static DomainError? ValidateList(GetServersQuery query)
+    private static AppError? ValidateList(GetServersQuery query)
     {
         if (query.Page < 1) query.Page = 1;
         if (query.PageSize < 1) query.PageSize = 1;
         if (query.PageSize > 200) query.PageSize = 200;
 
         if (query.Tags != null && query.Tags.Count > 50)
-            return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Too many tags in filter.", DomainErrorKind.Validation);
+            return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Too many tags in filter.", ErrorKind.Validation);
 
         if (query.Status != null && NormalizeStatus(query.Status) == null)
-            return new DomainError(DomainErrorCodes.PlatformServers.ValidationFailed, "Invalid status. Allowed: Active, Inactive.", DomainErrorKind.Validation);
+            return new AppError(DomainErrorCodes.PlatformServers.ValidationFailed, "Invalid status. Allowed: Active, Inactive.", ErrorKind.Validation);
 
         return null;
     }

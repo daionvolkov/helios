@@ -121,18 +121,18 @@ public sealed class ServersAppService : IServersAppService
     private bool CanRead() => _current.IsInRole("Owner") || _current.IsInRole("Admin") || _current.IsInRole("Viewer");
     private bool CanWrite() => _current.IsInRole("Owner") || _current.IsInRole("Admin");
 
-    private static AppError MapError(DomainError? e)
+    private static AppError MapError(AppError e)
     {
         if (e == null)
             return new AppError(ErrorCodes.Common.Unexpected, "Unexpected error", ErrorKind.Internal);
 
         var kind = e.Kind switch
         {
-            DomainErrorKind.Validation => ErrorKind.Validation,
-            DomainErrorKind.Unauthorized => ErrorKind.Unauthorized,
-            DomainErrorKind.Forbidden => ErrorKind.Forbidden,
-            DomainErrorKind.NotFound => ErrorKind.NotFound,
-            DomainErrorKind.Conflict => ErrorKind.Conflict,
+            ErrorKind.Validation => ErrorKind.Validation,
+            ErrorKind.Unauthorized => ErrorKind.Unauthorized,
+            ErrorKind.Forbidden => ErrorKind.Forbidden,
+            ErrorKind.NotFound => ErrorKind.NotFound,
+            ErrorKind.Conflict => ErrorKind.Conflict,
             _ => ErrorKind.Internal
         };
 
